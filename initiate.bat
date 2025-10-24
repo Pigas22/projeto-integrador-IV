@@ -21,11 +21,11 @@ if not exist "%PYTHON_PATH%" (
     goto RUN
 )
 
-:: 2️⃣ Verifica se o Streamlit está instalado dentro do venv
-echo Verificando se o Streamlit esta instalado...
-"%PYTHON_PATH%" -m pip show streamlit >nul 2>&1
+:: 2️⃣ Verifica se o Flask está instalado dentro do venv
+echo Verificando se o Flask esta instalado...
+"%PYTHON_PATH%" -m pip show flask >nul 2>&1
 if errorlevel 1 (
-    echo Streamlit nao encontrado. Instalando dependencias...
+    echo Flask nao encontrado. Instalando dependencias...
     "%PYTHON_PATH%" -m pip install -r "%REQUIREMENTS%"
 )
 
@@ -35,9 +35,9 @@ if errorlevel 1 (
 :: 4️⃣ Tudo certo, iniciar o app
 :RUN
 echo ============================================
-echo Iniciando o projeto Streamlit...
+echo Iniciando o projeto Flask...
 echo ============================================
-"%PYTHON_PATH%" -m streamlit run "project\%APP_FILE%"
+"%PYTHON_PATH%" "project\%APP_FILE%"
 
 pause
 endlocal

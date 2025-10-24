@@ -13,9 +13,3 @@ echo ================================
 echo Ambiente configurado com sucesso!
 echo ================================
 pause
-
-@REM echo ================================
-@REM echo Verificando se a instalacao do Streamlit funcionou...
-@REM echo ================================
-@REM ".venv\Scripts\python.exe" -m streamlit hello
-@REM pause
