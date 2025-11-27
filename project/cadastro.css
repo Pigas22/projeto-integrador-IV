@@ -1,0 +1,102 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #f3f6fb;
+}
+
+/* Barra azul (hero) */
+.hero {
+    background: linear-gradient(90deg, #007bff, #005ed0);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* Card central */
+.cadastro-card {
+    width: 80%;
+    max-width: 450px;
+    margin: -60px auto 0 auto; /* puxa o card para cima */
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.cadastro-card h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.cadastro-card p {
+    text-align: center;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Formulário */
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cadastro-form label {
+    font-weight: bold;
+}
+
+.cadastro-form input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.cadastro-form button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cadastro-form button:hover {
+    background: #005fcc;
+}
+
+/* Link inferior */
+.cadastro-text {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.cadastro-text a {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cadastro-text a:hover {
+    text-decoration: underline;
+}
