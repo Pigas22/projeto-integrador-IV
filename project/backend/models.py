@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "sqlite:///./banco.db" # aqui a gnt cria o banco no diretorio
+DATABASE_URL = "sqlite:///./project/backend/banco.db" # aqui a gnt cria o banco no diretorio
 
 engine=create_engine(
     DATABASE_URL,

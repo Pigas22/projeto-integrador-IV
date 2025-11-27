@@ -1,8 +1,14 @@
 from sqlalchemy import select,asc,desc,update,delete
 from sqlalchemy.orm import aliased#, create_engine, case, extract, and_, or_,text, Date,cast,select,func,String,outerjoin,desc,not_,exists,literal,literal_column,join
-from  flask import render_template, url_for,app,request, Flask
-from models import Usuario, Medico, SessionLocal,Consulta
-app = Flask(__name__)
+from flask import render_template, url_for,app,request, Flask
+from backend.models import Usuario, Medico, SessionLocal,Consulta
+
+app = Flask(
+    __name__,
+    template_folder='templates/',
+    static_folder='static/'
+)
+
 session=SessionLocal()
 pac=aliased(Usuario,name='pac')
 med=aliased(Medico,name='med')
@@ -10,10 +16,10 @@ con=aliased(Consulta,name='con')
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
-@app.route('/criacao_usuarios')
-def criacao_usuarios():
+@app.route('/cadastro_usuario')
+def cadastro_usuario():
     nome=request.args.get('nome')
     email=request.args.get('email')
     senha=request.args.get('senha')
@@ -30,15 +36,15 @@ def criacao_usuarios():
     except Exception as e:
         print(f'Erro ao criar usuario: {e}')
     return render_template(
-        'criacao_usuarios.html',
+        'cadastro-usuario.html',
         nome=nome,
         email=email,
         senha=senha,
         comorbidades=comorbidades
     )
 
-@app.route('/criacao_medicos')
-def criacao_medicos():
+@app.route('/cadastro_medico')
+def cadastro_medico():
     nome=request.args.get('nome')
     especialidade=request.args.get('especialidade')
     crm=request.args.get('crm')
@@ -54,7 +60,7 @@ def criacao_medicos():
     except Exception as e:
         print(f'Erro ao cadastrar médico: {e}')
     return render_template(
-        'criacao_medicos.html',
+        'cadastro-medico.html',
         nome=nome,
         especialidade=especialidade,
         crm=crm )
@@ -134,6 +140,14 @@ def listar_consultas():
         'listar_consultas.html',
         nome=nome,
         resultado=resultado)
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=3050)  # inicia o servidor Flask em modo debug
 
