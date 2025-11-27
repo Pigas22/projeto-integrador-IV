@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saúde IA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="icon"></div>
+      <h1>IA Saúde</h1>
+    </div>
+    <p>Avaliação rápida do seu estado e sugestões de atendimento</p>
+    <div class="menu">
+      <button>Perfil</button>
+      <button>Agendar</button>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <div class="user-card">
+        <img src="https://via.placeholder.com/80" alt="avatar" />
+        <h2>Você</h2>
+        <p>—</p>
+      </div>
+
+      <section class="info">
+        <h3>Sintomas importantes</h3>
+        <ul>
+          <li>Febre alta (> 38.5°C)</li>
+          <li>Dificuldade para respirar</li>
+          <li>Dor no peito intensa</li>
+          <li>Sangramento incontrolável</li>
+        </ul>
+      </section>
+
+      <section class="classification">
+        <h3>Classificação</h3>
+        <ul>
+          <li><span class="dot green"></span> Verde — Observação / autocuidado</li>
+          <li><span class="dot yellow"></span> Amarelo — Consultar médico em breve</li>
+          <li><span class="dot red"></span> Vermelho — Emergência imediata</li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="chat">
+      <div class="chat-header">
+        <h3>Assistente IA de Saúde</h3>
+        <div class="status">
+          <span class="dot green"></span> Estado: —
+        </div>
+      </div>
+
+      <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+          <div class="message ia">
+            Olá! Escreva como você está se sentindo (ex: "Tenho febre e náusea há 2 dias") — eu avalio e sugiro próximos passos.
+          </div>
+        </div>
+
+        <div class="chat-input">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Digite seus sintomas..."
+          />
+          <button id="send-btn">Enviar</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="rightbar">
+      <section class="help">
+        <h3>Ajuda rápida</h3>
+        <button class="emergency" id="emergency-btn">Estou em emergência</button>
+        <button class="find" id="find-btn">Encontrar médico próximo</button>
+
+        <div id="emergency-info"></div>
+        <ul id="medicos-list"></ul>
+      </section>
+
+      <section class="history">
+        <h3>Histórico (local)</h3>
+        <ul id="history-list"></ul>
+      </section>
+    </aside>
+  </main>
+
+  <script>
+    const sendBtn = document.getElementById("send-btn");
+    const userInput = document.getElementById("user-input");
+    const chatMessages = document.getElementById("chat-messages");
+    const historyList = document.getElementById("history-list");
+
+    const emergencyBtn = document.getElementById("emergency-btn");
+    const findBtn = document.getElementById("find-btn");
+    const emergencyInfo = document.getElementById("emergency-info");
+    const medicosList = document.getElementById("medicos-list");
+
+    // Enviar mensagem do chat
+    sendBtn.addEventListener("click", () => {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage("user", text);
+      userInput.value = "";
+
+      setTimeout(() => {
+        const classification = classifySymptom(text);
+        addMessage("ia", classification.message);
+        saveHistory(classification.level);
+      }, 500);
+    });
+
+    function addMessage(sender, text) {
+      const div = document.createElement("div");
+      div.classList.add("message", sender);
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function classifySymptom(text) {
+      const t = text.toLowerCase();
+      if (
+        t.includes("febre alta") ||
+        t.includes("dor no peito") ||
+        t.includes("sangramento") ||
+        t.includes("falta de ar")
+      ) {
+        return { level: "vermelho", message: "⚠️ Seu estado parece grave (vermelho). Procure atendimento médico imediatamente." };
+      } else if (t.includes("febre") || t.includes("tosse") || t.includes("náusea")) {
+        return { level: "amarelo", message: "🟡 Seu estado é moderado (amarelo). Recomendo marcar uma consulta médica nos próximos dias." };
+      } else {
+        return { level: "verde", message: "🟢 Seu estado parece leve (verde). Mantenha observação e autocuidado." };
+      }
+    }
+
+    function saveHistory(level) {
+      const li = document.createElement("li");
+      li.textContent = `Avaliação: ${level}`;
+      historyList.appendChild(li);
+    }
+
+    // Emergência
+    emergencyBtn.addEventListener("click", () => {
+      emergencyInfo.textContent = "📞 Ligue imediatamente para o SAMU: 192";
+      medicosList.innerHTML = "";
+    });
+
+    // Médicos próximos
+    findBtn.addEventListener("click", () => {
+      emergencyInfo.textContent = "";
+      const medicos = [
+        { nome: "Dr. João Silva", endereco: "Rua A, 123 - Centro", telefone: "(27) 99999-1111" },
+        { nome: "Dra. Maria Santos", endereco: "Av. B, 456 - Jardim", telefone: "(27) 98888-2222" },
+        { nome: "Dr. Carlos Pereira", endereco: "Rua C, 789 - Bairro Novo", telefone: "(27) 97777-3333" }
+      ];
+
+      medicosList.innerHTML = "";
+      medicos.forEach(m => {
+        const li = document.createElement("li");
+        li.textContent = `${m.nome} - ${m.endereco} - ${m.telefone}`;
+        medicosList.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>

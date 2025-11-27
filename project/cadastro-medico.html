@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Médico - IA Saúde</title>
+    <link rel="stylesheet" href="cadastro-medico.css">
+</head>
+<body>
+
+    <header class="hero">
+        <h1>IA Saúde</h1>
+        <p>Cadastro de Profissional</p>
+    </header>
+
+    <main>
+        <div class="cadastro-card">
+            <h2>Cadastro Médico</h2>
+
+            <form class="cadastro-form" action="cadastro-medico.css" method="post">
+
+                <label for="nome">Nome completo:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="crm">CRM:</label>
+                <input type="text" id="crm" name="crm" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <label for="confirmar">Confirmar senha:</label>
+                <input type="password" id="confirmar" name="confirmar" required>
+
+                <button type="submit">Criar conta</button>
+
+            </form>
+
+            <p class="login-text">
+                Já possui conta? <a href="login.html">Entrar</a>
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>

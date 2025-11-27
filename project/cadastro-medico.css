@@ -1,0 +1,105 @@
+/* Reseta */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #f3f6fb;
+}
+
+/* Hero */
+.hero {
+    width: 100%;
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #007bff, #005fcc);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 42px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-top: 8px;
+}
+
+/* Centralizar card */
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: -40px;
+}
+
+/* Card */
+.cadastro-card {
+    background: #ffffff;
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.cadastro-card h2 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Formulário */
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+.cadastro-form label {
+    font-weight: bold;
+    color: #333;
+}
+
+.cadastro-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Botão */
+.cadastro-form button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cadastro-form button:hover {
+    background: #0056b3;
+}
+
+/* Texto */
+.login-text {
+    text-align: center;
+    margin-top: 15px;
+    color: #555;
+    font-size: 14px;
+}
+
+.login-text a {
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
