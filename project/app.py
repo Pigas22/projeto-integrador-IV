@@ -1,8 +1,8 @@
 from sqlalchemy import select,asc,desc,update,delete
 from sqlalchemy.orm import create_engine, case, extract, and_, or_,text, Date,cast,select,func,String,outerjoin,desc,not_,exists,literal,literal_column,join,aliased
-from  flask import render_template, url_for,app,request
+from  flask import render_template, url_for,app,request, Flask
 from models import Usuario, Medico, SessionLocal,Consulta
-
+app = Flask(__name__)
 session=SessionLocal()
 pac=aliased(Usuario,name='pac')
 med=aliased(Medico,name='med')
@@ -134,5 +134,7 @@ def listar_consultas():
         'listar_consultas.html',
         nome=nome,
         resultado=resultado)
+if __name__ == "__main__":
+    app.run(debug=True)  # inicia o servidor Flask em modo debug
 
 
