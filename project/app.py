@@ -1,5 +1,5 @@
 from sqlalchemy import select,asc,desc,update,delete
-from sqlalchemy.orm import create_engine, case, extract, and_, or_,text, Date,cast,select,func,String,outerjoin,desc,not_,exists,literal,literal_column,join,aliased
+from sqlalchemy.orm import aliased#, create_engine, case, extract, and_, or_,text, Date,cast,select,func,String,outerjoin,desc,not_,exists,literal,literal_column,join
 from  flask import render_template, url_for,app,request, Flask
 from models import Usuario, Medico, SessionLocal,Consulta
 app = Flask(__name__)
@@ -84,7 +84,7 @@ def listar_usuarios():
         resultado=resultado
     )
 
-@app.route('listar_medicos')
+@app.route('/listar_medicos')
 def listar_medicos():
     especialidade=request.args.get('especialidade','todos')
     try:
@@ -135,6 +135,6 @@ def listar_consultas():
         nome=nome,
         resultado=resultado)
 if __name__ == "__main__":
-    app.run(debug=True)  # inicia o servidor Flask em modo debug
+    app.run(debug=True, port=3050)  # inicia o servidor Flask em modo debug
 
 
