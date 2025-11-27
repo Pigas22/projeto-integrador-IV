@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seu Perfil - IA Saúde</title>
+  <link rel="stylesheet" href="/project/static/perfil.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="icon"></div>
+      <h1>Seu Perfil</h1>
+    </div>
+    <p>Informações da sua conta e histórico de avaliações</p>
+
+    <div class="menu">
+      <a href="home.html"><button>⬅ Voltar</button></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="profile-card">
+      <img src="https://via.placeholder.com/120" alt="foto" />
+      <h2>Você</h2>
+      <p>Email: —</p>
+      <p>Idade: —</p>
+    </section>
+
+    <section class="section-box">
+      <h3>Histórico de Classificações</h3>
+      <ul id="historico-class"></ul>
+    </section>
+
+    <section class="section-box">
+      <h3>Mensagens enviadas no chat</h3>
+      <ul id="historico-chat"></ul>
+    </section>
+
+  </main>
+
+  <script>
+    // Carregar histórico salvo no localStorage
+    const histClass = JSON.parse(localStorage.getItem("historicoClass")) || [];
+    const histChat = JSON.parse(localStorage.getItem("historicoChat")) || [];
+
+    const ulClass = document.getElementById("historico-class");
+    const ulChat = document.getElementById("historico-chat");
+
+    // Preenche histórico de classificações
+    histClass.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = "Classificação: " + item;
+      ulClass.appendChild(li);
+    });
+
+    // Preenche histórico de mensagens
+    histChat.forEach(msg => {
+      const li = document.createElement("li");
+      li.textContent = msg;
+      ulChat.appendChild(li);
+    });
+  </script>
+
+</body>
+</html>

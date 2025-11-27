@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Médico - IA Saúde</title>
+  <link rel="stylesheet" href="/project/static/homeMedico.css">
+</head>
+<body>
+  <header>
+    <h1>IA Saúde</h1>
+    <p>Bem-vindo, Dr. Médico</p>
+    <button class="btn-sair">Sair</button>
+  </header>
+
+  <main>
+    <!-- Card de agendamentos -->
+    <div class="card">
+      <h2>Agendamentos</h2>
+
+      <!-- Filtro por data -->
+      <div class="filtro-container">
+        <label for="filtro-data">Filtrar por data:</label>
+        <input type="date" id="filtro-data">
+      </div>
+
+      <!-- Lista com scroll -->
+      <div class="lista-agendamentos" id="lista-agendamentos">
+        <div class="agendamento">
+          <strong>Clínico Geral — 10/02/2025</strong>
+          <p>Médico: Dr. João Silva</p>
+          <p>Local: Posto de Saúde Central</p>
+          <button class="btn-ver">Ver</button>
+        </div>
+        <div class="agendamento">
+          <strong>Dermatologia — 15/03/2025</strong>
+          <p>Médico: Dra. Maria Santos</p>
+          <p>Local: Hospital Municipal</p>
+          <button class="btn-ver">Ver</button>
+        </div>
+        <div class="agendamento">
+          <strong>Cardiologia — 20/03/2025</strong>
+          <p>Médico: Dr. Carlos Pereira</p>
+          <p>Local: Clínica Modelo</p>
+          <button class="btn-ver">Ver</button>
+        </div>
+        <!-- Adicione mais agendamentos aqui -->
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Funcionalidade básica do botão "Ver"
+    const botoesVer = document.querySelectorAll('.btn-ver');
+    botoesVer.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const agendamento = btn.closest('.agendamento');
+        const detalhes = agendamento.querySelectorAll('p');
+        let mensagem = "Detalhes do agendamento:\n";
+        detalhes.forEach(p => {
+          mensagem += p.textContent + "\n";
+        });
+        alert(mensagem);
+      });
+    });
+
+    // Filtrar por data
+    const filtroData = document.getElementById('filtro-data');
+    filtroData.addEventListener('change', () => {
+      const dataSelecionada = filtroData.value;
+      const agendamentos = document.querySelectorAll('.agendamento');
+      agendamentos.forEach(ag => {
+        const texto = ag.querySelector('strong').textContent;
+        if (!texto.includes(formatarData(dataSelecionada))) {
+          ag.style.display = 'none';
+        } else {
+          ag.style.display = 'flex';
+        }
+      });
+    });
+
+    function formatarData(data) {
+      if (!data) return '';
+      const partes = data.split('-');
+      return partes[2] + '/' + partes[1] + '/' + partes[0];
+    }
+  </script>
+</body>
+</html>

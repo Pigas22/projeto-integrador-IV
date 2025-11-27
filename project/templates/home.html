@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saúde IA</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}"/>
+  <link rel="stylesheet" href="/project/static/home.css" />
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -14,9 +16,10 @@
     </div>
     <p>Avaliação rápida do seu estado e sugestões de atendimento</p>
     <div class="menu">
-      <button>Perfil</button>
-      <button>Agendar</button>
+      <button onclick="window.location.href='perfil.html'">Perfil</button>
+      <button onclick="window.location.href='agendamento.html'">Agendamento</button>
     </div>
+
   </header>
 
   <main>
@@ -58,16 +61,13 @@
       <div class="chat-container">
         <div class="chat-messages" id="chat-messages">
           <div class="message ia">
-            Olá! Escreva como você está se sentindo (ex: "Tenho febre e náusea há 2 dias") — eu avalio e sugiro próximos passos.
+            Olá! Escreva como você está se sentindo (ex: "Tenho febre e náusea há 2 dias") — eu avalio e sugiro próximos
+            passos.
           </div>
         </div>
 
         <div class="chat-input">
-          <input
-            type="text"
-            id="user-input"
-            placeholder="Digite seus sintomas..."
-          />
+          <input type="text" id="user-input" placeholder="Digite seus sintomas..." />
           <button id="send-btn">Enviar</button>
         </div>
       </div>
@@ -170,4 +170,5 @@
     });
   </script>
 </body>
+
 </html>

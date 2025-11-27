@@ -1,0 +1,249 @@
+/* ============================
+   RESET
+============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+body {
+  background: #eaf0ff;
+  color: #333;
+}
+
+/* ============================
+   HEADER PREMIUM
+============================ */
+header {
+  background: linear-gradient(135deg, #0c6dae, #2a94d6);
+  color: white;
+  padding: 40px 25px;
+  text-align: center;
+
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  animation: fadeIn 0.6s ease;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 10px;
+}
+
+header .icon {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+header h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+header p {
+  margin-top: 8px;
+  opacity: 0.95;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+/* HEADER – BOTÕES */
+header .menu button {
+  background: white;
+  color: #0c6fde;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 4px;
+  transition: 0.25s ease;
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+header .menu button:hover {
+  background: #eaf3ff;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+}
+
+header .menu a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ============================
+   MAIN CONTENT
+============================ */
+main {
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 0 20px;
+  animation: fadeIn 0.6s ease;
+}
+
+.agenda-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ============================
+   CARDS PREMIUM
+============================ */
+.agenda-card {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: 0.25s ease;
+}
+
+.agenda-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.agenda-card h3 {
+  color: #0c6fde;
+  margin-bottom: 18px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* ============================
+   FORM SCROLLBAR PREMIUM
+============================ */
+.agendar-scroll {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.agendar-scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.agendar-scroll::-webkit-scrollbar-thumb {
+  background: #c3d3ff;
+  border-radius: 12px;
+}
+
+.agendar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #aac0ff;
+}
+
+/* ============================
+   FORM FIELDS
+============================ */
+.agenda-card label {
+  font-weight: 600;
+  margin: 8px 0 4px;
+  display: block;
+}
+
+.agenda-card input,
+.agenda-card select,
+.agenda-card textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #cdd9f6;
+  background: #f9fbff;
+  margin-bottom: 14px;
+  transition: 0.2s ease;
+}
+
+.agenda-card input:focus,
+.agenda-card select:focus,
+.agenda-card textarea:focus {
+  outline: none;
+  border-color: #0c6fde;
+  background: #f1f6ff;
+  box-shadow: 0 0 6px rgba(12,110,222,0.25);
+}
+
+/* ============================
+   BOTÃO PREMIUM AGENDAR
+============================ */
+.agendar-btn {
+  background: linear-gradient(135deg, #0c6fde, #004cb5);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 700;
+  width: 100%;
+  transition: 0.3s ease;
+  transform: translateY(0);
+}
+
+.agendar-btn:hover {
+  background: linear-gradient(135deg, #0b63c9, #003f99);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
+
+/* ============================
+   HISTÓRICO
+============================ */
+.agenda-item {
+  background: #f3f6ff;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border-left: 4px solid #0c6fde;
+}
+
+.agenda-item strong {
+  color: #0c6fde;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ============================
+   MOBILE
+============================ */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.7rem;
+  }
+
+  .agenda-card {
+    padding: 22px;
+  }
+}
+
+/* ============================
+   ANIMAÇÃO
+============================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendamentos - IA Saúde</title>
+  <link rel="stylesheet" href="/project/static/agendamento.css"/>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <div class="icon"></div>
+      <h1>IA Saúde</h1>
+    </div>
+    <p>Gerencie seus agendamentos</p>
+
+    <div class="menu">
+      <button><a href="home.html">⬅ Voltar</a></button>
+    </div>
+  </header>
+
+  <main class="agenda-container">
+
+    <!-- CARD DE NOVO AGENDAMENTO -->
+    <div class="agenda-card">
+      <h3>Novo Agendamento</h3>
+
+      <div class="agendar-scroll">
+
+        <label for="especialidade">Especialidade</label>
+        <select id="especialidade">
+          <option>Clínico Geral</option>
+          <option>Cardiologia</option>
+          <option>Dermatologia</option>
+          <option>Ortopedia</option>
+        </select>
+
+        <label for="medico">Médico</label>
+        <select id="medico">
+          <option>Dr. João Silva</option>
+          <option>Dra. Maria Santos</option>
+          <option>Dr. Carlos Pereira</option>
+        </select>
+
+        <label for="local">Local</label>
+        <select id="local">
+          <option>Posto de Saúde Central</option>
+          <option>Clínica Modelo</option>
+          <option>Hospital Municipal</option>
+        </select>
+
+        <label for="dia">Dia</label>
+        <input type="date" id="dia"/>
+
+        <label for="hora">Horário</label>
+        <input type="time" id="hora"/>
+
+        <label for="obs">Observação</label>
+        <textarea id="obs" rows="3"></textarea>
+      </div>
+
+      <button class="agendar-btn">Agendar</button>
+      <p id="agenda-confirmacao"></p>
+    </div>
+
+    <!-- CARD DE HISTÓRICO -->
+    <div class="agenda-card">
+      <h3>Histórico de Agendamentos</h3>
+
+      <div class="agenda-item">
+        <strong>Consulta — 10/02/2025</strong>
+        Clínica Modelo — Dr. João Silva
+      </div>
+
+      <div class="agenda-item">
+        <strong>Dermatologia — 15/03/2025</strong>
+        Hospital Municipal — Dra. Maria Santos
+      </div>
+
+    </div>
+
+  </main>
+</body>
+</html>

@@ -4,31 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - IA Saúde</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="/project/static/login.css">
 </head>
+<body>
 
-<body class="login-page">
+    <!-- Barra azul superior -->
+    <div class="header-bar">
+        <h1>IA Saúde</h1>
+        <p>Acesse sua conta para continuar</p>
+    </div>
 
-    <main class="login-container">
-        <div class="login-card">
-            <h1>IA Saúde</h1>
-            <p class="subtitle">Acesse sua avaliação de saúde</p>
+    <!-- Card de login -->
+    <div class="login-card">
 
-            <form action="/login" method="post" class="login-form">
+        <!-- Logo opcional (um quadrado azul estilizado) -->
 
-                <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" required>
+        <h2>Entrar</h2>
+        <p class="lead">Use seu e-mail e senha</p>
 
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" required>
+        <form class="login-form" action="#" method="post">
 
-                <button type="submit">Entrar</button>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
 
-                <p class="signup-text">Não tem conta? <a href="{{ url_for('home') }}">Cadastre-se</a></p>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha" required>
 
-            </form>
-        </div>
-    </main>
+            <button type="submit">Entrar</button>
+
+        </form>
+
+        <p class="signup-text">
+            Não tem conta?
+            <a href="/project/templates/cadastro-usuario.html">Criar conta</a>
+        </p>
+
+    </div>
 
 </body>
 </html>

@@ -1,0 +1,193 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f6f9ff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== HEADER ===== */
+header {
+  width: 100%;
+  background: linear-gradient(135deg, #0c6dae, #2a94d6);
+  color: white;
+  padding: 50px 20px 60px 20px;
+  text-align: center;
+  position: relative;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+header p {
+  margin-top: 6px;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* Botão de sair */
+.btn-sair {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #ff4b4b;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 200ms, box-shadow 200ms, filter 200ms;
+}
+
+.btn-sair:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(255,75,75,0.2);
+}
+
+/* ===== MAIN ===== */
+main {
+  max-width: 900px;
+  width: 100%;
+  margin: -40px auto 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 0 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(10, 60, 120, 0.08);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(10, 60, 120,0.12);
+}
+
+.card h2 {
+  color: #0c6dae;
+  margin-bottom: 15px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+/* ===== FILTRO ===== */
+.filtro-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.filtro-container label {
+  font-weight: 600;
+  color: #253244;
+  font-size: 14px;
+}
+
+.filtro-container input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #cdd9f6;
+  background: #f8fbff;
+  font-size: 14px;
+  color: #1f2d3d;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filtro-container input:focus {
+  border-color: #0c6dae;
+  box-shadow: 0 4px 12px rgba(12,106,174,0.12);
+}
+
+/* ===== LISTA COM SCROLL ===== */
+.lista-agendamentos {
+  max-height: 330px;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lista-agendamentos::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lista-agendamentos::-webkit-scrollbar-thumb {
+  background: #a9c4ff;
+  border-radius: 8px;
+}
+
+/* ===== AGENDAMENTO ===== */
+.agendamento {
+  background: #eef4ff;
+  padding: 12px 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agendamento p {
+  font-size: 14px;
+}
+
+.agendamento strong {
+  color: #0c6dae;
+}
+
+.btn-ver {
+  align-self: flex-start;
+  background: #0c6dae;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 180ms, box-shadow 180ms, filter 180ms;
+}
+
+.btn-ver:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 6px 14px rgba(12,106,174,0.16);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 26px;
+  }
+  .card {
+    padding: 20px;
+  }
+  .btn-sair {
+    top: 15px;
+    right: 15px;
+  }
+}

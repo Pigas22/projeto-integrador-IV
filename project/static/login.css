@@ -1,90 +1,238 @@
-/* Reseta básico igual ao seu global */
+/* ============================================================
+   AGENDAMENTO.CSS — Tema Premium Azul Clínico
+   Mesmo padrão visual do login.css fornecido
+   ============================================================ */
+
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
 }
 
-body {
-  background: #f3f6fb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Card */
-.login-card {
-  background: #ffffff;
-  width: 350px;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+/* BARRA SUPERIOR */
+header {
+  width: 100%;
+  padding: 45px 20px;
+  background: linear-gradient(135deg, #0c6dae, #2a94d6);
+  color: white;
   text-align: center;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 8px 25px rgba(12, 106, 174, 0.16);
 }
 
 /* Título */
-.login-card h1 {
-  margin-bottom: 5px;
-  font-size: 26px;
-  color: #007bff;
+header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
 }
 
-.login-card p {
-  margin-bottom: 25px;
-  color: #555;
+/* Subtítulo */
+header p {
+  margin-top: 6px;
+  font-size: 15px;
+  opacity: 0.9;
 }
 
-/* Formulário */
-.login-form {
+/* Logo */
+header .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+header .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.25);
+}
+
+/* BOTÃO VOLTAR */
+header .menu button {
+  margin-top: 22px;
+  padding: 12px 25px;
+  border-radius: 12px;
+  border: none;
+  background: white;
+  color: #0c6dae;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(255, 255, 255, 0.15);
+
+  transition: transform 200ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 200ms,
+              filter 200ms;
+}
+
+header .menu button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #0c6dae;
+  text-decoration: none;
+}
+
+/* Hover */
+header .menu button:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.05);
+  box-shadow: 0 16px 32px rgba(255, 255, 255, 0.25);
+}
+
+/* Clique */
+header .menu button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* ====================== BODY ======================= */
+body {
+  background: #f6f9ff;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* Container principal */
+.agenda-container {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 0 20px;
+
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  text-align: left;
+  gap: 28px;
 }
 
-.login-form label {
-  font-weight: bold;
-  color: #333;
+/* ====================== CARD ======================= */
+.agenda-card {
+  background: #ffffff;
+  padding: 26px;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(10, 60, 120, 0.10);
+  border: 1px solid rgba(44, 113, 180, 0.05);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 220ms;
 }
 
-.login-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
+.agenda-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(10, 60, 120, 0.14);
+}
+
+/* Título do card */
+.agenda-card h3 {
+  color: #0c6dae;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  letter-spacing: -0.3px;
+}
+
+/* ================= SCROLL INTERNO ================== */
+.agendar-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.agendar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.agendar-scroll::-webkit-scrollbar-thumb {
+  background: #c8ddf5;
   border-radius: 8px;
 }
 
-/* Botão */
-.login-form button {
-  margin-top: 10px;
-  padding: 12px;
-  background: #007bff;
-  color: white;
+/* ================= FORM ITENS ================== */
+.agenda-card label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #233345;
+  margin-bottom: 5px;
+}
+
+.agenda-card input,
+.agenda-card select,
+.agenda-card textarea {
+  width: 100%;
+  padding: 11px 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #d8e7fb;
+  background: #f8fbff;
+  transition: 160ms border-color, 160ms box-shadow;
+  margin-bottom: 12px;
+}
+
+.agenda-card input:focus,
+.agenda-card select:focus,
+.agenda-card textarea:focus {
+  border-color: #0c6dae;
+  box-shadow: 0 6px 18px rgba(12,106,174,0.12);
+  outline: none;
+}
+
+/* ================= BOTÃO AGENDAR ================== */
+.agendar-btn {
+  margin-top: 8px;
+  padding: 13px;
+  border-radius: 12px;
   border: none;
-  border-radius: 8px;
+  background: linear-gradient(90deg, #0c6dae, #2a94d6);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 16px;
+
+  transition: transform 200ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 200ms,
+              filter 200ms;
+
+  box-shadow: 0 8px 22px rgba(12,106,174,0.12);
 }
 
-.login-form button:hover {
-  background: #0056b3;
+.agendar-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(12,106,174,0.16);
+  filter: brightness(1.05);
 }
 
-/* Texto abaixo do formulário */
-.signup-text {
-    text-align: center;
-    font-size: 14px;
-    margin-top: 10px;
-    color: #555;
+.agendar-btn:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
-.signup-text a {
-    color: #0056b3;
-    text-decoration: none;
-    font-weight: bold;
+/* ================= HISTÓRICO ================== */
+.agenda-item {
+  background: #f1f6ff;
+  border-left: 4px solid #0c6dae;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-.signup-text a:hover {
-    text-decoration: underline;
+.agenda-item strong {
+  color: #0c6dae;
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 700;
+}
+
+/* ================= RESPONSIVO ================== */
+@media (max-width: 600px) {
+  .agenda-card {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 26px;
+  }
 }
