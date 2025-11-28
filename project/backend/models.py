@@ -16,7 +16,7 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)#aqui
 class Usuario(Base):
     __tablename__='usuario'
 
-    id=Column(Integer,primary_key=True,autoincrement=True)
+    id=Column(Integer,primary_key=True)
     nome=Column(String,nullable=False)
     nome_usuario=Column(String,nullable=False)
     senha=Column(String,nullable=False)

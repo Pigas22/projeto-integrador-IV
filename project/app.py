@@ -1,31 +1,58 @@
-from sqlalchemy import select,asc,desc,update,delete
-from sqlalchemy.orm import aliased#, create_engine, case, extract, and_, or_,text, Date,cast,select,func,String,outerjoin,desc,not_,exists,literal,literal_column,join
-from flask import render_template, url_for,app,request, Flask
-from backend.models import Usuario, Medico, SessionLocal,Consulta
-
-app = Flask(
-    __name__,
-    template_folder='templates/',
-    static_folder='static/'
+from sqlalchemy import (
+    create_engine, select, asc, desc, update, delete,
+    text, Date, cast, func, String, literal, literal_column
 )
 
+from sqlalchemy.orm import (
+    sessionmaker, aliased, join, contains_eager
+)
+
+from  flask import render_template, url_for,app,request, Flask,flash,redirect
+from backend.models import Usuario, Medico, SessionLocal,Consulta
+app = Flask(__name__)
 session=SessionLocal()
 pac=aliased(Usuario,name='pac')
 med=aliased(Medico,name='med')
 con=aliased(Consulta,name='con')
 
 @app.route('/')
-def home():
-    return render_template('index.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        senha = request.form.get('senha')
+        
+        try:
+            # Busca o usuário pelo email
+            usuario = session.query(Usuario).filter(Usuario.email == email).first()
+            
+            if usuario and usuario.senha == senha:  # Em produção, use hash de senha!
+                # Salva informações na sessão
+                session['usuario_id'] = pac.id
+                session['usuario_nome'] = pac.nome
+                session['usuario_email'] = pac.email
+                
+                flash(f'Bem-vindo(a), {usuario.nome}!', 'success')
+                return redirect(url_for('home.html'))
+            else:
+                flash('Email ou senha incorretos.', 'danger')
+                
+        except Exception as e:
+            print(f'Erro ao fazer login: {e}')
+            flash('Erro ao processar login. Tente novamente.', 'danger')
+    
+    return render_template('login.html')
 
-@app.route('/cadastro_usuario')
-def cadastro_usuario():
+@app.route('/criacao_usuarios')
+def criacao_usuarios():
+    cpf=request.args.get('cpf')
     nome=request.args.get('nome')
     email=request.args.get('email')
     senha=request.args.get('senha')
     comorbidades=request.args.get('comorbidades')
     try:
         novo_usuario=pac(
+            cpf=id,
             nome=nome,
             email=email,
             senha=senha,
@@ -36,15 +63,16 @@ def cadastro_usuario():
     except Exception as e:
         print(f'Erro ao criar usuario: {e}')
     return render_template(
-        'cadastro-usuario.html',
+        'criacao_usuarios.html',
+        cpf=id,
         nome=nome,
         email=email,
         senha=senha,
         comorbidades=comorbidades
     )
 
-@app.route('/cadastro_medico')
-def cadastro_medico():
+@app.route('/criacao_medicos')
+def criacao_medicos():
     nome=request.args.get('nome')
     especialidade=request.args.get('especialidade')
     crm=request.args.get('crm')
@@ -142,13 +170,10 @@ def listar_consultas():
         resultado=resultado)
 
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
 
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3050)  # inicia o servidor Flask em modo debug
+    app.run(debug=True)  # inicia o servidor Flask em modo debug
 
 
