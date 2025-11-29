@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saúde IA</title>
-  <link rel="stylesheet" href="/project/static/home.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -16,10 +17,9 @@
     </div>
     <p>Avaliação rápida do seu estado e sugestões de atendimento</p>
     <div class="menu">
-      <button onclick="window.location.href='perfil.html'">Perfil</button>
-      <button onclick="window.location.href='agendamento.html'">Agendamento</button>
+        <a href="{{ url_for('perfil') }}"><button>Perfil</button></a>
+        <a href="{{ url_for('agendamento') }}"><button>Agendamento</button></a>
     </div>
-
   </header>
 
   <main>
@@ -50,27 +50,31 @@
       </section>
     </aside>
 
-    <section class="chat">
-      <div class="chat-header">
+    <section class="chat relative max-w-[750px] mx-auto w-full" id="chat">
+
+    <div class="chat-header">
         <h3>Assistente IA de Saúde</h3>
-        <div class="status">
-          <span class="dot green"></span> Estado: —
-        </div>
-      </div>
+        <div class="status"><span class="dot green"></span> Estado: —</div>
+    </div>
 
-      <div class="chat-container">
+    <div class="pb-24 chat-container" id="chat-container">
         <div class="chat-messages" id="chat-messages">
-          <div class="message ia">
-            Olá! Escreva como você está se sentindo (ex: "Tenho febre e náusea há 2 dias") — eu avalio e sugiro próximos
-            passos.
-          </div>
+            <div class="message ia">
+                Olá! Eu sou o Assistente IA do hospital. Posso te ajudar a agendar consultas, fornecer informações sobre serviços médicos ou tirar dúvidas gerais de saúde. Como posso te ajudar hoje?
+            </div>
         </div>
+    </div>
 
-        <div class="chat-input">
-          <input type="text" id="user-input" placeholder="Digite seus sintomas..." />
-          <button id="send-btn">Enviar</button>
-        </div>
-      </div>
+    <div id="chat-bar"
+        class="chat-bar fixed inset-x-0 bottom-0 w-full z-50 bg-gray-200 border-t border-gray-400 p-3 flex items-center gap-2">
+        <input id="user-input" type="text" placeholder="Digite sua mensagem..."
+            class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button id="send-btn"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-md">
+            Enviar
+        </button>
+    </div>
+
     </section>
 
     <aside class="rightbar">
@@ -101,20 +105,47 @@
     const emergencyInfo = document.getElementById("emergency-info");
     const medicosList = document.getElementById("medicos-list");
 
-    // Enviar mensagem do chat
-    sendBtn.addEventListener("click", () => {
+    // Enviar mensagem para o chatbot Python/Gemini
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    async function sendMessage() {
       const text = userInput.value.trim();
       if (!text) return;
 
+      // Adicionar mensagem do usuário ao chat
       addMessage("user", text);
       userInput.value = "";
+      sendBtn.disabled = true;
 
-      setTimeout(() => {
-        const classification = classifySymptom(text);
-        addMessage("ia", classification.message);
-        saveHistory(classification.level);
-      }, 500);
-    });
+      try {
+        // Enviar para o backend Flask
+        const response = await fetch("{{ url_for('home') }}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          addMessage("ia", data.response);
+          saveHistory(text);
+        } else {
+          addMessage("ia", `Erro: ${data.error}`);
+        }
+      } catch (error) {
+        addMessage("ia", "Erro ao conectar com o servidor.");
+        console.error(error);
+      } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
+      }
+    }
 
     function addMessage(sender, text) {
       const div = document.createElement("div");
@@ -124,25 +155,9 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function classifySymptom(text) {
-      const t = text.toLowerCase();
-      if (
-        t.includes("febre alta") ||
-        t.includes("dor no peito") ||
-        t.includes("sangramento") ||
-        t.includes("falta de ar")
-      ) {
-        return { level: "vermelho", message: "⚠️ Seu estado parece grave (vermelho). Procure atendimento médico imediatamente." };
-      } else if (t.includes("febre") || t.includes("tosse") || t.includes("náusea")) {
-        return { level: "amarelo", message: "🟡 Seu estado é moderado (amarelo). Recomendo marcar uma consulta médica nos próximos dias." };
-      } else {
-        return { level: "verde", message: "🟢 Seu estado parece leve (verde). Mantenha observação e autocuidado." };
-      }
-    }
-
-    function saveHistory(level) {
+    function saveHistory(message) {
       const li = document.createElement("li");
-      li.textContent = `Avaliação: ${level}`;
+      li.textContent = message.substring(0, 50) + (message.length > 50 ? "..." : "");
       historyList.appendChild(li);
     }
 
@@ -168,6 +183,20 @@
         medicosList.appendChild(li);
       });
     });
+
+    function ajustarBarraChat() {
+        const chatMessages = document.getElementById('chat');
+        const chatBar = document.getElementById('chat-bar');
+
+        if (chatMessages && chatBar) {
+            const rect = chatMessages.getBoundingClientRect();
+            chatBar.style.width = rect.width + "px";
+            chatBar.style.left = rect.left + "px";
+        }
+    }
+
+    window.addEventListener("resize", ajustarBarraChat);
+    window.addEventListener("load", ajustarBarraChat);
   </script>
 </body>
 

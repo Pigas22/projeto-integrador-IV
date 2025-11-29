@@ -77,10 +77,10 @@ if not exist .env (
     echo|set /p="GEMINI_API_KEY="sua_chave"" > .env
     bash -c "sed -i 's/\r$//' .env"
     bash -c "sed -i 's/[ \t]*$//' .env"
-)
 
-echo Informe a sua chave da API do Gemini no arquivo .env, apos informada, basta:
-pause
+    echo Informe a sua chave da API do Gemini no arquivo .env, apos informada, basta:
+    pause
+)
 
 :: 6 Por fim, iniciar o app
 :RUN

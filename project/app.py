@@ -1,7 +1,7 @@
-from sqlalchemy import asc
 from sqlalchemy.orm import aliased
-from flask import render_template, url_for, request, Flask, redirect, session
+from flask import render_template, url_for, request, Flask, redirect, session, jsonify
 from backend.models import Usuario, Medico, Consulta, SessionLocal
+from backend import chatbot
 
 app = Flask(
     __name__,
@@ -17,11 +17,36 @@ pac = aliased(Usuario, name='pac')
 med = aliased(Medico, name='med')
 con = aliased(Consulta, name='con')
 
+chat_global = None
 
 @app.route('/')
-@app.route('/home')
-def home():
+def index():
     return render_template('index.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+    global chat_global
+
+    if chat_global is None:
+        chat_global = chatbot.iniciar_chat()
+
+    if request.method == 'POST':
+        data = request.json
+        user_message = data.get('message', '').strip()
+
+        if not user_message:
+            return jsonify({'error': 'Mensagem vazia'}), 400
+
+        try:
+            resposta_texto = chatbot.envia_mensagem_usuario(chat_global, user_message)
+            return jsonify({'success': True, 'response': resposta_texto})
+
+        except Exception as e:
+            print(f"Erro na comunicação com a API Gemini: {e}")
+            return jsonify({'success': False, 'error': f"Erro na API: {str(e)}"}), 500
+
+    return render_template('home.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -37,7 +62,7 @@ def login():
             if usuario:
                 session['usuario_id'] = usuario.id
                 session['usuario_nome'] = usuario.nome
-                return redirect(url_for('listar_consultas'))
+                return redirect(url_for('home'))
             else:
                 return render_template('login.html', erro='Email ou senha incorretos.')
         except Exception:
@@ -143,6 +168,16 @@ def criar_consulta():
             return render_template('criar_consulta.html', erro='Erro ao criar consulta.', usuario_id=usuario_id, usuario_nome=usuario_nome, medicos=medicos)
     medicos = db_session.query(Medico).order_by(Medico.nome).all()
     return render_template('criar_consulta.html', usuario_id=usuario_id, usuario_nome=usuario_nome, medicos=medicos)
+
+
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+
+@app.route('/agendamento')
+def agendamento():
+    return render_template('agendamento.html')
 
 
 @app.teardown_appcontext
