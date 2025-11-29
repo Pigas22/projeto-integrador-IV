@@ -38,7 +38,7 @@
         </div>
         {% endif %}
 
-        <form method="POST" action="{{ url_for('criacao_medicos') }}" class="space-y-5">
+        <form method="POST" action="{{ url_for('criacao_medico') }}" class="space-y-5">
 
             <div>
                 <label for="nome" class="block text-sm font-semibold text-[#233345] mb-1.5">Nome Completo</label>
@@ -88,9 +88,9 @@
 
         <p class="text-center text-sm text-[#5a6c7d] mt-6 pt-6 border-t border-[#e8f0fa]">
             Já possui cadastro?
-            <a href="{{ url_for('listar_medicos') }}" class="text-[#0c6dae] hover:text-[#2a94d6] font-semibold hover:underline transition-colors">
+            <!-- <a href="{{ url_for('listar_medicos') }}" class="text-[#0c6dae] hover:text-[#2a94d6] font-semibold hover:underline transition-colors">
                 Ver médicos cadastrados
-            </a>
+            </a> -->
         </p>
 
     </div>

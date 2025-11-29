@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Saúde - Início</title>
-    <link rel="stylesheet" href="/project/static/index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
 
@@ -19,9 +19,9 @@
             <p>Escolha como deseja continuar</p>
 
             <div class="btn-group">
-                <a href="login.html" class="btn">Login</a>
-                <a href="cadastro-usuario.html" class="btn">Cadastro Paciente</a>
-                <a href="cadastro-medico.html" class="btn">Cadastro Médico</a>
+                <a href="{{ url_for('login') }}" class="btn">Login</a>
+                <a href="{{ url_for('criacao_usuarios') }}" class="btn">Cadastro Paciente</a>
+                <a href="{{ url_for('criacao_medico') }}" class="btn">Cadastro Médico</a>
             </div>
         </div>
     </main>

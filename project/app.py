@@ -3,7 +3,12 @@ from sqlalchemy.orm import aliased
 from flask import render_template, url_for, request, Flask, redirect, session
 from backend.models import Usuario, Medico, Consulta, SessionLocal
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder='templates/',
+    static_folder='static/'
+)
+
 app.secret_key = "chave_super_secreta_123"
 
 db_session = SessionLocal()
@@ -14,6 +19,11 @@ con = aliased(Consulta, name='con')
 
 
 @app.route('/')
+@app.route('/home')
+def home():
+    return render_template('index.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -57,6 +67,9 @@ def criacao_usuarios():
             return render_template('criacao_usuarios.html', erro='Erro ao criar usuário.')
     return render_template('criacao_usuarios.html')
 
+@app.route('/criacao_medico')
+def criacao_medico():
+    return render_template('criacao_medico.html')
 
 @app.route('/listar_medicos')
 def listar_medicos():
